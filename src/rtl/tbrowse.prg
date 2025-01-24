@@ -870,6 +870,8 @@ METHOD colorValue( nColorIndex ) CLASS TBrowse
       ELSEIF nColorIndex == 0
          RETURN "N/N"
       ENDIF
+   ELSEIF HB_ISSTRING( nColorIndex ) 
+      RETURN nColorIndex
    ENDIF
 
    RETURN ::aColors[ _TBC_CLR_STANDARD ]
@@ -988,8 +990,12 @@ STATIC FUNCTION _CELLCOLORS( aCol, xValue, nMaxColorIndex )
             IF nColorIndex >= 0 .AND. nColorIndex <= nMaxColorIndex
                aColors[ nPos ] := nColorIndex
             ENDIF
+         ELSEIF HB_ISSTRING( nColorIndex )
+            aColors[ nPos ] := nColorIndex
          ENDIF
       NEXT
+   ELSEIF HB_ISSTRING( xColor )
+     aColors[ 1 ] := xColor
    ENDIF
 
    RETURN aColors
